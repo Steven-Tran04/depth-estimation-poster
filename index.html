@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Depth Estimation Robustness</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    h2 {
+      color: #34495e;
+      margin-top: 40px;
+    }
+    .subtitle {
+      font-size: 1.2em;
+      color: #555;
+      margin-top: 0;
+      margin-bottom: 2em;
+    }
+    .navbar {
+      background-color: #f5f5f5;
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #ccc;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-left a {
+      margin-right: 20px;
+      text-decoration: none;
+      color: #2c3e50;
+      font-weight: bold;
+    }
+    .nav-left a:hover {
+      text-decoration: underline;
+    }
+    .nav-right {
+      font-weight: bold;
+      color: #2c3e50;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    .image-row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .image-row figure {
+      text-align: center;
+      width: 30%;
+      margin: 0;
+    }
+    .image-row img {
+      width: 100%;
+      height: auto;
+    }
+    .image-row figcaption {
+      font-size: 14px;
+      color: #555;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="#benchmarks">Benchmarks</a>
+      <a href="#custom-dataset">Custom Dataset</a>
+      <a href="#degradations">Degradations</a>
+      <a href="#models">Models</a>
+    </div>
+    <div class="nav-right">  
+      <img src="https://www.caldenwloka.com/wp-content/uploads/2022/08/TransparentLogo-1.png" 
+      alt="Lab for CATS logo!!!" 
+      width="100">
+    </div>
+  </nav>
+
+  <h1>Depth Estimation Under Degradations</h1>
+  <p class="subtitle">Exploring the robustness of monocular depth models on imperfect images.</p>
+
+  <h2 id="benchmarks">Existing Benchmarks</h2>
+  <p>
+    We evaluate model robustness using several standard RGB-D datasets:
+    <ul>
+      <li><strong>DIODE</strong>: Includes a diverse set indoor/outdoor scenes.</li>
+      <img src="https://production-media.paperswithcode.com/datasets/DIODE-0000003656-f6985904.jpg" 
+      alt="DIODE dataset example" 
+      width="500">
+      <p></p>
+      <li><strong>ETH3D</strong>: Focuses on a structured set of outdoor scenes.</li>
+      <img src="https://production-media.paperswithcode.com/datasets/Screenshot_2021-01-28_at_17.39.52.png" 
+      alt="ETH3D dataset example" 
+      width="500">
+      <p></p>
+      <li><strong>iBims-1</strong>: Contains a variety of indoor scenes.</li>
+      <img src="https://production-media.paperswithcode.com/datasets/Screenshot_2021-06-07_at_14.20.27.png" 
+      alt="iBims dataset example" 
+      width="500">
+      <p></p>
+      <li><strong>KITTI</strong>: Covers inputs from urban driving scenarios.</li>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSey01dHCg5imSCPm4-Va_D1_NCYBVh_GS9fA&s" 
+      alt="KITTI dataset example" 
+      width="500">
+    </ul>
+  </p>
+
+  <h2 id="custom-dataset">Custom Dataset</h2>
+    In addition to testing on existing benchmarks, we introduce a custom dataset to evaluate model performance on images with systematic variations in acquisition properties that tend to be underrepresented in datasets. In particular, we focus on images with compositions that are underrepresented in existing datasets, looking at different vantage points and lighting conditions, as well as images taken with different camera paramters that determine the exposure of the image. Below is a scene from the McGregor breezeway, where we fix shutter speed, ISO, and aperture. We construct a grid by varying the other two parameters.
+  <div class="image-row">
+    <figure>
+      <img src="imgs/shutter_grid.jpg" alt="shutter speed grid">
+      <figcaption>Fixed shutter speed. Vertical axis corresponds to ISO and horizontal axis corresponds to aperture.</figcaption>
+    </figure>
+    <figure>
+      <img src="imgs/iso_grid.jpg" alt="ISO grid">
+      <figcaption>Fixed ISO. Vertical axis corresponds to aperture and horizontal axis corresponds to shuter speed.</figcaption>
+    </figure>
+    <figure>
+      <img src="imgs/aperture_grid.jpg" alt="aperture grid">
+      <figcaption>Fixed aperture. Vertical axis corresponds to shutter speed and horizontal axis corresponds to ISO.</figcaption>
+    </figure>
+  </div>
+
+  <p></p>
+  Shutter speed determines how long the camera sensor is exposed to light, ISO determines the sensitivity of the camera sensor to light, and aperture determines how much light enters the camera. By varying these parameters, we can create a diverse set of images that also mimic practical challenges that can be faced by these models.
+
+  <h2 id="degradations">Degradations</h2>
+  <p>
+    To study robustness beyond the original data distribution, we generate degraded versions of each dataset using synthetic corruptions. This allows us to systematically evaluate model sensitivity under controlled perturbations. We apply various common image degradations, including:
+    <ul>
+      <li>Brightness Manipulation</li>
+      <li>Gaussian Blur</li>
+      <li>Injected Noise</li>
+      <li>Color Space Shifts</li>
+    </ul>
+    These transformations simulate realistic scenarios where lighting changes, motion blur, compression artifacts, may occur, or where accessible filters may be applied.
+    <p></p>
+    <div style="text-align: center;">
+    <img src="imgs/degradations.png" alt="Brightness, blurring, injected noise, and color space manipulations" width="1250">
+    </div>
+  </p>
+
+  <h2 id="models">Models</h2>
+  <p>
+    Our evaluation includes multiple state-of-the-art monocular depth estimation models, using encoder decoder architectures. Each model is tested on degraded images to assess their ability to generalize to the range of inputs that they may encounter under real-world settings.
+  </p>
+
+    <h3>Marigold</h3>
+  <p>
+    Marigold utilizes a diffusion-based approach to produce a metric depth map of an RGB image. Marigold was released in 2024, though improvements to the model are actively being worked on.
+    <div style="text-align: center;">
+      <img src="imgs/marigold.png" 
+        alt="Marigold architecture" 
+        width="700">
+    </div>  
+  </p>
+
+  <h3>Depth Anything</h3>
+  <p>
+    Depth Anything leverages semantic segmentation to produce an inverse metric depth map of an RGB image. Both Depth Anything V1 and V2 were released in 2024.
+    <div style="text-align: center;">
+      <img src="imgs/depthanything.png" 
+      alt="Depth Anything architecture" 
+      width="700">
+    </div>  
+  </p>
+
+  <h3>UniDepth</h3>
+  <p>
+    UniDepth incorporates camera intrinsics to produce a metric depth map of an RGB image. UniDepth V1 was released in 2024, and UniDepth V2 was released in 2025.
+  </p>
+  <div style="text-align: center;">
+    <img src="imgs/unidepth.png" 
+    alt="UniDepth architecture" 
+    width="700">
+  </div>
+</body>
+</html>
