@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 40px;
+      margin: 30px;
       line-height: 1.6;
       padding-top: 70px;
     }
@@ -79,7 +79,6 @@
       display: block;         /* avoid weird inline gaps */
       max-width: 100%;        /* never overflow screen */
       height: auto;
-      margin: 0 auto;         /* center by default */
     }
     figure {
       max-width: 100%;     /* never overflow */
@@ -118,24 +117,32 @@
       margin: 20px;         /* reduce side margins on tablets */
     }
   }
-  @media (max-width: 768px) {
+  /* @media (max-width: 768px) {
   .banner {
-      padding: 40px 0 120px 0;  /* less height on phones */
-      background-position: center; /* recenter the image */
+      padding: 40px 0 120px 0;
+      background-position: center;
     }
     .banner h1 {
-      font-size: 1.8em;        /* shrink title inside banner */
+      font-size: 1.8em;
     }
     .banner .subtitle {
       font-size: 1.2em;
     }
-  }
+  } */
   @media (max-width: 768px) {
     body {
       margin: 10px;         /* smaller margins on phones */
       padding-top: 80px;    /* still leave navbar space */
     }
-
+    .banner h1 {
+        font-size: 1.8em;        /* shrink title inside banner */
+    }
+    .banner .subtitle {
+      font-size: 1.2em;
+    }
+    .nav-left a {
+      font-size: 14px;
+    }
     h1 {
       font-size: 2em;     /* shrink main title */
     }
@@ -153,7 +160,6 @@
     .image-row figure {
       width: 80%;           /* stack images vertically on small screens */
     }
-  }
 </style>
 </head>
 <body>
@@ -290,10 +296,13 @@
     window.addEventListener('scroll', () => {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-      if (scrollTop > lastScrollTop) {
-        navbar.style.top = "-100px"; // hides nav
+      // Always show navbar at very top
+      if (scrollTop <= 0) {
+        navbar.style.top = "0";
+      } else if (scrollTop > lastScrollTop) {
+        navbar.style.top = "-100px"; // scrolling down -> hide
       } else {
-        navbar.style.top = "0"; // shows nav
+        navbar.style.top = "0"; // scrolling up -> show
       }
 
       lastScrollTop = scrollTop;
