@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Depth Estimation Robustness</title>
   <style>
     body {
@@ -91,6 +92,54 @@
       border-radius: 8px;
       position: relative;
     }
+    /* === RESPONSIVE FIXES === */
+  @media (max-width: 1024px) {
+    body {
+      margin: 20px;         /* reduce side margins on tablets */
+    }
+  }
+  @media (max-width: 768px) {
+    body {
+      margin: 10px;         /* smaller margins on phones */
+      padding-top: 80px;    /* still leave navbar space */
+    }
+
+    h1 {
+      font-size: 2.2em;     /* shrink main title */
+    }
+    .subtitle {
+      font-size: 1.4em;
+    }
+    .nav-left {
+      display: flex;
+      flex-wrap: wrap;      /* allow nav links to wrap */
+      gap: 10px;
+    }
+    .nav-left a {
+      font-size: 18px;
+    }
+    .image-row figure {
+      width: 80%;           /* stack images vertically on small screens */
+    }
+  }
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 1.8em;     /* even smaller title on very small phones */
+    }
+    .subtitle {
+      font-size: 1.2em;
+    }
+    .nav-left {
+      flex-direction: column; /* stack links in one column */
+      align-items: flex-start;
+    }
+    .nav-left a {
+      margin-right: 0;
+    }
+    .nav-right img {
+      width: 80px; /* smaller logo on phones */
+    }
+  }
 </style>
 </head>
 <body>
