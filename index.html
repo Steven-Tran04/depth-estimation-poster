@@ -75,6 +75,20 @@
       color: #555;
       margin-top: 8px;
     }
+    figure {
+      max-width: 100%;     /* never overflow */
+      text-align: center;
+      margin: 20px auto;
+    }
+    figure img {
+      width: 100%;         /* always scale down */
+      height: auto;
+    }
+  /* Limit extremely wide figures like degradations */
+  .degradations-figure {
+    max-width: 900px;    /* nice readable width on desktop */
+    width: 90%;          /* auto-shrink on smaller screens */
+  }
     figcaption {
       font-size: 14px;
       color: #555;
@@ -99,6 +113,18 @@
     }
   }
   @media (max-width: 768px) {
+  .banner {
+      padding: 40px 0 120px 0;  /* less height on phones */
+      background-position: center; /* recenter the image */
+    }
+    .banner h1 {
+      font-size: 1.8em;        /* shrink title inside banner */
+    }
+    .banner .subtitle {
+      font-size: 1.2em;
+    }
+  }
+  @media (max-width: 768px) {
     body {
       margin: 10px;         /* smaller margins on phones */
       padding-top: 80px;    /* still leave navbar space */
@@ -118,29 +144,8 @@
     .nav-left a {
       font-size: 18px;
     }
-    figure {
-      width: 80%;
-    }
     .image-row figure {
       width: 80%;           /* stack images vertically on small screens */
-    }
-  }
-  @media (max-width: 480px) {
-    h1 {
-      font-size: 1.8em;     /* even smaller title on very small phones */
-    }
-    .subtitle {
-      font-size: 1.2em;
-    }
-    .nav-left {
-      flex-direction: column; /* stack links in one column */
-      align-items: flex-start;
-    }
-    .nav-left a {
-      margin-right: 0;
-    }
-    .nav-right img {
-      width: 80px; /* smaller logo on phones */
     }
   }
 </style>
