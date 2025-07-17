@@ -111,24 +111,17 @@
       border-radius: 8px;
       position: relative;
     }
+    .centered-img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
     /* === RESPONSIVE FIXES === */
   @media (max-width: 1024px) {
     body {
       margin: 20px;         /* reduce side margins on tablets */
     }
   }
-  /* @media (max-width: 768px) {
-  .banner {
-      padding: 40px 0 120px 0;
-      background-position: center;
-    }
-    .banner h1 {
-      font-size: 1.8em;
-    }
-    .banner .subtitle {
-      font-size: 1.2em;
-    }
-  } */
   @media (max-width: 768px) {
     body {
       margin: 10px;         /* smaller margins on phones */
@@ -261,35 +254,33 @@
     Our evaluation includes multiple state-of-the-art monocular depth estimation models, using encoder decoder architectures. Each model is tested on degraded images to assess their ability to generalize to the range of inputs that they may encounter under real-world settings.
   </p>
 
-    <h3>Marigold</h3>
-  <p>
-    Marigold utilizes a diffusion-based approach to produce a metric depth map of an RGB image. Marigold was released in 2024, though improvements to the model are actively being worked on.
-    <div style="text-align: center;">
-      <img src="imgs/marigold.png" 
-        alt="Marigold architecture" 
-        width="700">
-    </div>  
-  </p>
+<h3>Marigold</h3>
+<p>
+  Marigold utilizes a diffusion-based approach to produce a metric depth map of an RGB image. Marigold was released in 2024, though improvements to the model are actively being worked on.
+</p>
+  <img src="imgs/marigold.png" 
+       class="centered-img"
+       alt="Marigold architecture" 
+       width="700">
 
-  <h3>Depth Anything</h3>
-  <p>
-    Depth Anything leverages semantic segmentation to produce an inverse metric depth map of an RGB image. Both Depth Anything V1 and V2 were released in 2024.
-    <div style="text-align: center;">
-      <img src="imgs/depthanything.png" 
-      alt="Depth Anything architecture" 
-      width="900">
-    </div>  
-  </p>
+<h3>Depth Anything</h3>
+<p>
+  Depth Anything leverages semantic segmentation to produce an inverse metric depth map of an RGB image. Both Depth Anything V1 and V2 were released in 2024.
+</p>
+  <img src="imgs/depthanything.png" 
+       class="centered-img"
+       alt="Depth Anything architecture" 
+       width="900">
 
-  <h3>UniDepth</h3>
-  <p>
-    UniDepth incorporates camera intrinsics to produce a metric depth map of an RGB image. UniDepth V1 was released in 2024, and UniDepth V2 was released in 2025.
-  </p>
-  <div style="text-align: center;">
-    <img src="imgs/unidepth.png" 
-    alt="UniDepth architecture" 
-    width="900">
-  </div>
+<h3>UniDepth</h3>
+<p>
+  UniDepth incorporates camera intrinsics to produce a metric depth map of an RGB image. UniDepth V1 was released in 2024, and UniDepth V2 was released in 2025.
+</p>
+  <img src="imgs/unidepth.png" 
+       class="centered-img"
+       alt="UniDepth architecture" 
+       width="900">
+  
   <script>
     let lastScrollTop = 0;
     const navbar = document.getElementById('navbar');
