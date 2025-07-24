@@ -183,19 +183,18 @@
     <ul>
       <li><strong>DIODE</strong>: Includes a diverse set indoor/outdoor scenes.</li>
       <p></p>
-      <img src="https://production-media.paperswithcode.com/datasets/DIODE-0000003656-f6985904.jpg" 
+      <img src="imgs/DIODE.png" 
       alt="DIODE dataset example" 
       width="700">
       <p></p>
       <li><strong>ETH3D</strong>: Focuses on a structured set of outdoor scenes.</li>
       <p></p>
-      <img src="https://production-media.paperswithcode.com/datasets/Screenshot_2021-01-28_at_17.39.52.png" 
+      <img src="imgs/ETH3D.png" 
       alt="ETH3D dataset example" 
       width="700">
       <p></p>
       <li><strong>iBims-1</strong>: Contains a variety of indoor scenes.</li>
-      <p></p>
-      <img src="https://production-media.paperswithcode.com/datasets/Screenshot_2021-06-07_at_14.20.27.png" 
+      <img src="imgs/iBims.png" 
       alt="iBims dataset example" 
       width="700">
       <p></p>
@@ -213,6 +212,7 @@
     <p></p>
     <div class="image-row">
     <figure>
+      <!-- FIXME -->
       <img src="imgs/shutter_grid.jpg" alt="shutter speed grid">
       <figcaption>Fixed shutter speed. Vertical axis corresponds to ISO and horizontal axis corresponds to aperture.</figcaption>
     </figure>
@@ -238,7 +238,7 @@
       <li>Injected Noise</li>
       <li>Color Space Shifts</li>
     </ul>
-    These transformations simulate realistic scenarios where lighting changes, motion blur, compression artifacts, may occur, or where accessible filters may be applied.
+    These transformations simulate realistic scenarios where lighting changes, motion blur, compression artifacts, may occur, or where accessible filters may be applied. Furthermore, because we cannot obtain ground truth depth maps for this dataset, we develop a new metric to evaluate model performance based on consistency of output across different degredations.
     
     <p></p>
     <div style="text-align: center;">
